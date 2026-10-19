@@ -1,0 +1,166 @@
+import 'package:flutter/material.dart';
+
+class LanguageProvider extends ChangeNotifier {
+  bool _isEnglish = false;
+
+  bool get isEnglish => _isEnglish;
+  // Untuk teks di tombol menu
+  String get currentLangCode => _isEnglish ? "EN" : "ID"; 
+  // Untuk aksen suara robot (Text-to-Speech)
+  String get ttsLanguage => _isEnglish ? "en-US" : "id-ID"; 
+
+  // Fungsi saat tombol bahasa ditekan
+  void toggleLanguage() {
+    _isEnglish = !_isEnglish;
+    notifyListeners();
+  }
+
+  // Fungsi untuk mengambil kata dari kamus
+  String getText(String key) {
+    if (_isEnglish) return _en[key] ?? key;
+    return _id[key] ?? key;
+  }
+
+  // KAMUS BAHASA INDONESIA
+  final Map<String, String> _id = {
+    'menu_token': 'Papan Token',
+    'menu_first_then': 'First - Then',
+    'menu_timer': 'Visual Timer',
+    'menu_flashcard': 'Flashcard',
+    'token_title': 'Papan Token',
+    'working_for': 'Saya bekerja untuk: ',
+    'choose_reward': 'Pilih Hadiah...',
+    'reward_title': 'Pilih Hadiah Target',
+    'target_3': 'Target: 3 Bintang',
+    'target_5': 'Target: 5 Bintang',
+    'target_10': 'Target: 10 Bintang',
+    'reset_board': 'Reset Papan',
+    'change_target': 'Ubah Target Bintang',
+    'hooray': 'Horee! Kamu Hebat!',
+    'try_again': 'Oh tidak, coba lebih baik lagi...',
+    'collect_stars': 'Ayo kumpulkan Bintang!',
+    'reward_gadget': 'Main Gadget',
+    'reward_snack': 'Camilan',
+    'reward_toy': 'Mainan',
+    'reward_park': 'Main di Luar',
+    'reward_tv': 'Nonton TV',
+    'first_then_title': 'First - Then',
+    'first': 'PERTAMA',
+    'then': 'LALU',
+    'task_study': 'Belajar',
+    'task_ipad': 'Main iPad',
+    'change_image': 'Ganti Gambar',
+    'timer_title': 'Visual Timer',
+    'stop_alarm': 'MATIKAN ALARM',
+    '15_sec': '15 Detik (Test)',
+    '1_min': '1 Menit',
+    '3_min': '3 Menit',
+    '5_min': '5 Menit',
+    '10_min': '10 Menit',
+    'flashcard_title': 'Flashcard Seru!',
+    'apple': 'Apel',
+    'car': 'Mobil',
+    'cat': 'Kucing',
+    'house': 'Rumah',
+    'enter_pin': 'Masukkan PIN Terapis',
+    'cancel': 'Batal',
+    'unlock': 'Buka Kunci',
+    'wrong_pin': 'PIN Salah!',
+    'kiosk_off_pin': 'Masukkan PIN untuk Matikan Kiosk',
+    'kiosk_disabled': 'Kiosk Mode Dimatikan',
+    'kiosk_enabled': 'Kiosk Mode Aktif! Tablet Terkunci.',
+    'reward_book': 'Buku Cerita',
+    'reward_break': 'Waktu Istirahat',
+    'reward_music': 'Dengar Musik',
+    'dog': 'Anjing',
+    'plane': 'Pesawat',
+    'orange': 'Jeruk',
+    'lemon': 'Lemon',
+    'tree': 'Pohon',
+    'ball': 'Bola',
+    'settings_title': 'Pengaturan',
+    'volume_label': 'Volume Suara',
+    'speed_label': 'Kecepatan Bicara',
+    'spell_speed_label': 'Kecepatan Ejaan',
+    'choose_token': 'Pilih Bentuk Token',
+    'enter_pin': 'Masukkan PIN Terapis',
+    'cancel': 'Batal',
+    'wrong_pin': 'PIN Salah!',
+    'unlock': 'Buka Kunci',
+    'kiosk_off_pin': 'Masukkan PIN untuk Matikan Kiosk',
+    'kiosk_disabled': 'Kiosk Mode Dimatikan',
+    'kiosk_enabled': 'Kiosk Mode Aktif! Tablet Terkunci.',
+    
+  };
+
+  // KAMUS BAHASA INGGRIS
+  final Map<String, String> _en = {
+    'menu_token': 'Token Board',
+    'menu_first_then': 'First - Then',
+    'menu_timer': 'Visual Timer',
+    'menu_flashcard': 'Flashcards',
+    'token_title': 'Token Board',
+    'working_for': 'I am working for: ',
+    'choose_reward': 'Choose Reward...',
+    'reward_title': 'Choose Target Reward',
+    'target_3': 'Target: 3 Stars',
+    'target_5': 'Target: 5 Stars',
+    'target_10': 'Target: 10 Stars',
+    'reset_board': 'Reset Board',
+    'change_target': 'Change Star Target',
+    'hooray': 'Hooray! Great Job!',
+    'try_again': 'Oh no, let\'s try again...',
+    'collect_stars': 'Let\'s collect Stars!',
+    'reward_gadget': 'Gadget Time',
+    'reward_snack': 'Snacks',
+    'reward_toy': 'Toys',
+    'reward_park': 'Play Outside',
+    'reward_tv': 'Watch TV',
+    'first_then_title': 'First - Then',
+    'first': 'FIRST',
+    'then': 'THEN',
+    'task_study': 'Study',
+    'task_ipad': 'Play iPad',
+    'change_image': 'Change Image',
+    'timer_title': 'Visual Timer',
+    'stop_alarm': 'STOP ALARM',
+    '15_sec': '15 Sec (Test)',
+    '1_min': '1 Minute',
+    '3_min': '3 Minutes',
+    '5_min': '5 Minutes',
+    '10_min': '10 Minutes',
+    'flashcard_title': 'Fun Flashcards!',
+    'apple': 'Apple',
+    'car': 'Car',
+    'cat': 'Cat',
+    'house': 'House',
+    'enter_pin': 'Enter Therapist PIN',
+    'cancel': 'Cancel',
+    'unlock': 'Unlock',
+    'wrong_pin': 'Wrong PIN!',
+    'kiosk_off_pin': 'Enter PIN to Turn Off Kiosk',
+    'kiosk_disabled': 'Kiosk Mode Disabled',
+    'kiosk_enabled': 'Kiosk Mode Enabled! Tablet Locked.',
+    'reward_book': 'Storybook',
+    'reward_break': 'Break Time',
+    'reward_music': 'Listen to Music',
+    'dog': 'Dog',
+    'plane': 'Airplane',
+    'orange': 'Orange',
+    'lemon': 'Lemon',
+    'tree': 'Tree',
+    'ball': 'Ball',
+    'settings_title': 'Settings',
+    'volume_label': 'Sound Volume',
+    'speed_label': 'Speech Rate',
+    'spell_speed_label': 'Spelling Speed',
+    'choose_token': 'Choose Token Icon',
+    'enter_pin': 'Enter Therapist PIN',
+    'cancel': 'Cancel',
+    'wrong_pin': 'Wrong PIN!',
+    'unlock': 'Unlock',
+    'kiosk_off_pin': 'Enter PIN to Disable Kiosk',
+    'kiosk_disabled': 'Kiosk Mode Disabled',
+    'kiosk_enabled': 'Kiosk Mode Enabled! Tablet Locked.',
+  };
+}
