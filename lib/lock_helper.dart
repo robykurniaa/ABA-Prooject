@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:kiosk_mode/kiosk_mode.dart';
-import 'language_provider.dart'; // Import kamus bahasa
+import 'package:shared_preferences/shared_preferences.dart';
+import 'language_provider.dart';
 
 class LockHelper {
-  // PIN RAHASIA TERAPIS
-  static const String therapistPin = "1111";
+  // 1. Mengambil PIN dari memori HP (Default: 1111)
+  static Future<String> getTherapistPin() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('therapist_pin') ?? '1111';
+  }
 
-  // Fungsi Dialog PIN sekarang butuh 'LanguageProvider' dan 'titleKey' dari kamus
+  // 2. Menyimpan PIN baru ke memori HP secara permanen
+  static Future<void> setTherapistPin(String newPin) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('therapist_pin', newPin);
+  }
+
   static Future<bool> showPinDialog(BuildContext context, String titleKey, LanguageProvider lang) async {
     String enteredPin = "";
     bool isUnlocked = false;
+    String correctPin = await getTherapistPin(); // Ambil PIN aslinya
+
+    if (!context.mounted) return false;
 
     await showDialog(
       context: context,
@@ -25,10 +37,7 @@ class LockHelper {
             maxLength: 4,
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 24, letterSpacing: 10),
-            decoration: const InputDecoration(
-              hintText: "****",
-              counterText: "",
-            ),
+            decoration: const InputDecoration(hintText: "****", counterText: ""),
             onChanged: (value) => enteredPin = value,
           ),
           actionsAlignment: MainAxisAlignment.spaceEvenly,
@@ -40,7 +49,7 @@ class LockHelper {
             ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF98FB98)),
               onPressed: () {
-                if (enteredPin == therapistPin) {
+                if (enteredPin == correctPin) {
                   isUnlocked = true;
                   Navigator.pop(context);
                 } else {
@@ -58,7 +67,6 @@ class LockHelper {
     return isUnlocked;
   }
 
-  // Fungsi Toggle Kiosk juga dikirim 'LanguageProvider' agar Snackbarnya berbahasa Inggris/Indonesia
   static Future<void> toggleKioskMode(BuildContext context, LanguageProvider lang) async {
     final mode = await getKioskMode();
     bool isCurrentlyLocked = mode == KioskMode.enabled;

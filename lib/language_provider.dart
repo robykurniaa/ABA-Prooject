@@ -5,9 +5,9 @@ class LanguageProvider extends ChangeNotifier {
 
   bool get isEnglish => _isEnglish;
   // Untuk teks di tombol menu
-  String get currentLangCode => _isEnglish ? "EN" : "ID"; 
+  String get currentLangCode => _isEnglish ? "EN" : "ID";
   // Untuk aksen suara robot (Text-to-Speech)
-  String get ttsLanguage => _isEnglish ? "en-US" : "id-ID"; 
+  String get ttsLanguage => _isEnglish ? "en-US" : "id-ID";
 
   // Fungsi saat tombol bahasa ditekan
   void toggleLanguage() {
@@ -83,14 +83,13 @@ class LanguageProvider extends ChangeNotifier {
     'speed_label': 'Kecepatan Bicara',
     'spell_speed_label': 'Kecepatan Ejaan',
     'choose_token': 'Pilih Bentuk Token',
-    'enter_pin': 'Masukkan PIN Terapis',
-    'cancel': 'Batal',
-    'wrong_pin': 'PIN Salah!',
-    'unlock': 'Buka Kunci',
-    'kiosk_off_pin': 'Masukkan PIN untuk Matikan Kiosk',
-    'kiosk_disabled': 'Kiosk Mode Dimatikan',
-    'kiosk_enabled': 'Kiosk Mode Aktif! Tablet Terkunci.',
-    
+    'change_pin': 'Ubah PIN Terapis',
+    'mute_universal': 'Mute Universal (Bisu)',
+    'mute_desc': 'Matikan suara untuk mencegah sensory overload',
+    'new_pin_title': 'Masukkan PIN Baru',
+    'save': 'Simpan',
+    'pin_changed_success': 'PIN berhasil diubah!',
+    'time_up': 'Waktu Habis!',
   };
 
   // KAMUS BAHASA INGGRIS
@@ -155,12 +154,12 @@ class LanguageProvider extends ChangeNotifier {
     'speed_label': 'Speech Rate',
     'spell_speed_label': 'Spelling Speed',
     'choose_token': 'Choose Token Icon',
-    'enter_pin': 'Enter Therapist PIN',
-    'cancel': 'Cancel',
-    'wrong_pin': 'Wrong PIN!',
-    'unlock': 'Unlock',
-    'kiosk_off_pin': 'Enter PIN to Disable Kiosk',
-    'kiosk_disabled': 'Kiosk Mode Disabled',
-    'kiosk_enabled': 'Kiosk Mode Enabled! Tablet Locked.',
+    'change_pin': 'Change Therapist PIN',
+    'mute_universal': 'Universal Mute',
+    'mute_desc': 'Mute all sounds to prevent sensory overload',
+    'new_pin_title': 'Enter New PIN',
+    'save': 'Save',
+    'pin_changed_success': 'PIN successfully changed!',
+    'time_up': 'Time is up!',
   };
 }

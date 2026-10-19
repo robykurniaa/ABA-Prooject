@@ -11,11 +11,11 @@ import 'token_board.dart';
 import 'first_then_board.dart';
 import 'visual_timer_screen.dart';
 import 'flashcard_screen.dart';
-import 'settings_screen.dart'; // IMPORT LAYAR PENGATURAN
+import 'settings_screen.dart'; // PERBAIKAN 1: Import Settings Screen
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  
+ 
   // Mengunci orientasi layar ke landscape
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeRight,
@@ -26,8 +26,8 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => TokenProvider()),
-        ChangeNotifierProvider(create: (context) => LanguageProvider()), 
-        ChangeNotifierProvider(create: (context) => TtsProvider()), // PROVIDER TTS
+        ChangeNotifierProvider(create: (context) => LanguageProvider()),
+        ChangeNotifierProvider(create: (context) => TtsProvider()),
       ],
       child: const AbaApp(),
     ),
@@ -36,7 +36,7 @@ void main() {
 
 class AbaApp extends StatelessWidget {
   const AbaApp({super.key});
-  
+ 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -53,7 +53,7 @@ class AbaApp extends StatelessWidget {
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-  
+ 
   @override
   Widget build(BuildContext context) {
     final lang = context.watch<LanguageProvider>();
@@ -90,7 +90,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           
-          // TOMBOL PENGATURAN (GERIGI)
+          // PERBAIKAN 2: TOMBOL PENGATURAN (GERIGI) DITAMBAHKAN DI SINI
           Padding(
             padding: const EdgeInsets.only(right: 20.0, top: 10.0),
             child: IconButton(

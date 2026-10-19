@@ -5,8 +5,8 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-// IMPORT FILE BANTUAN KITA
 import 'token_provider.dart'; 
+import 'tts_provider.dart';
 import 'language_provider.dart'; 
 import 'lock_helper.dart'; 
 
@@ -36,6 +36,10 @@ class _TokenBoardScreenState extends State<TokenBoardScreen> {
   }
 
   Future<void> _playSound(String fileName) async {
+    // 1. Cek status mute dari gudang TtsProvider
+    final tts = context.read<TtsProvider>();
+    if (tts.isMuted) return; // Jika sedang mute, batalkan perintah putar suara!
+
     await _audioPlayer.stop();
     try {
       await _audioPlayer.play(AssetSource('audio/$fileName'));
